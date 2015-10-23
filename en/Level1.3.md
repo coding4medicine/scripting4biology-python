@@ -1,14 +1,18 @@
-# Loops and conditions
+# For loops
+
 
 Multiplication table  -
 
 ~~~~~~~~
 #!/usr/bin/env python
 
-i=1
-while(i<=10):
-     print 9*i
-     i=i+1
+#
+# The keyword 'for' is used to loop over the same code many times.
+# It uses two other keywords 'in' and 'range'. 
+#
+for i in range(1,10):
+    print i,7*i
+
 ~~~~~~~~
 
 

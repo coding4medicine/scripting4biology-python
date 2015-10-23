@@ -1,8 +1,2 @@
-# Module 2 - File Processing and Strings
+# Level 2 - Algorithms and coding practices
 
-## Reading files
-
-
-## Write into files
-
-## Strings

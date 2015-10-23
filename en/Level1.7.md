@@ -1,4 +1,5 @@
-# Loops and conditions
+# While loops
+
 
 Multiplication table  -
 

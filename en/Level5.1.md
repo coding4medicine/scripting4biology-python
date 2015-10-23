@@ -1,6 +1,4 @@
-
-Describing How to Code 
-(Based on Code for Reading a FASTA File)
+# Describing How to Code (Based on Code for Reading a FASTA File)
 
 
 Today we will do something different. I will explain how a program for a given problem is written from scratch, and all the trial-and-error that goes behind it. The example we choose is the one I sent out in the previous hand-out, namely the code for reading a FASTA file. I will explain the python version, but  the thought process behind the PERL version follows similar logic.
@@ -9,7 +7,7 @@ The task at hand is to read a FASTA file. You know that FASTA format has the ID 
 
 
 
-Step 1. Reading each line
+## Step 1. Reading each line
 
 First, we will write a code that reads the lines from a given file. As you write more and more codes, you will find that you are dealing with this question almost always. Therefore, it is prudent to have a couple of templates for reading files ready somewhere in your directory. We will evaluate those templates and explain the pros and cons of each.
 
@@ -23,6 +21,7 @@ lines=f.readlines()
 
 
 Template 2.
+
 ~~~~~~~~
 #!/usr/bin/env python
 f=open('genes.fasta','r')
@@ -41,6 +40,7 @@ Next, let us discuss the differences between template 1 and template 2. In templ
 You can see that template 1 is really convenient for programming, because the entire file is read in an array within the code and that array can be processed using 'for', ', we can process the array within our code. However, there are some disadvantages of doing so, when it comes to bioinformatics. Some FASTA files can be very big. You certainly do not always want to load the entire human genome using a 'readlines' statement.
 
 Here is how the programmers write code. They keep the above constraint at the back of the mind and then start with the simple option. If that fails, then they take a step back and modify their code with the more difficult option. Therefore, let us first go with Template 1 for our code.  Here is our code at the end of step 1.
+
 ~~~~~~~~
 #!/usr/bin/env python
 f=open('genes.fasta','r')
@@ -48,13 +48,17 @@ lines=f.readlines()
 ~~~~~~~~
 
 After completion of every step, it is prudent to test and make sure the code works. Let us do that after the above step and add a print statement. Since lines array reads the 'genes.fasta' files, a statement line 'print lines[3]' will print the third line. You can try it out.
+
 ~~~~~~~~
 #!/usr/bin/env python
 f=open('genes.fasta','r')
 lines=f.readlines()
 print lines[3]
 ~~~~~~~~
+
+
 Oops, there is a problem.
+
 ~~~~~~~~
 Traceback (most recent call last):
   File "./c.py", line 2, in <module>
@@ -67,6 +71,7 @@ You realize that you either do not have a file named 'genes.fasta' or the file i
 Once you handle the above problem, you will notice two things - 
 (i) The program is printing the fourth line instead of the third line. What is going on? By playing with different indices in the print statement, you find out that the array 'lines' stores the lines with indices 0,1,2,3,.....
 (ii) The program is printing an extra newline after the third line. Why so? The program is printing lines[3] from the file including the newline, and if you remember, python print command adds an extra newline after each statement. Hence you have one extra empty line. The best option is to remove newline from the end of lines[3]. The command for that is lines[3]=lines[3].rstrip('\n'). This command removes the newline from the end of lines[3] and saves it as the new lines[3]. Run the following code and you see it working fine.
+
 ~~~~~~~~
 #!/usr/bin/env python
 f=open('genes.fasta','r')
@@ -74,6 +79,7 @@ lines=f.readlines()
 lines[3]=lines[3].rstrip('\n')
 print lines[3]
 ~~~~~~~~
+
 Why not remove the newline from all lines? You try this code -
 
 ~~~~~~~~
@@ -83,7 +89,9 @@ lines=f.readlines()
 lines=lines.rstrip('\n')
 print lines[3]
 ~~~~~~~~
+
 and get the error -
+
 ~~~~~~~~
 Traceback (most recent call last):
   File "./c.py", line 4, in <module>
@@ -96,7 +104,7 @@ Oops, seems like trouble. What is going on? As it happens, the command rstrip('\
 
 
 
-Step 2. Processing the ID
+## Step 2. Processing the ID
 
 Let us now move on to processing the lines of the file, which are now stored in 'lines' array. We will first look for the FASTA ID. You know that the first line has a FASTA ID after '>'. So, let us see, whether we can write code to extract the ID. 
 
@@ -128,9 +136,10 @@ I encourage you to change the regular expression and try it on various lines to 
 
 
 
-Step 3. Processing the non-ID lines from FASTA file
+## Step 3. Processing the non-ID lines from FASTA file
 
 You know that the FASTA file has other lines, which contain nucleotide or protein sequences. How do we extract data from them? The answer is regular expression again. We create another regular expression for the non-ID lines. Our code grows to -
+
 ~~~~~~~~
 #!/usr/bin/env python
 import re
@@ -149,8 +158,7 @@ To understand how it works, you need to try the code yourself. No matter of desc
 
 
 
-
-Step 4. Data structure
+## Step 4. Data structure
 
 Alright. Now that we know how to process each line of the file, the task is to process the entire file and store into something within the code. What is that 'something' going to be? We need to decide about a data structure. Data structure is the method to store data within your program. For individual data, you can hold in string, integer or decimal data structure. For collection of data, you need something like array or associative array. 
 
@@ -177,7 +185,7 @@ You will see that the program prints {'ID2': 'ATGGTG', 'ID1': 'AAAAA'}. We have 
 
 
 
-Step 5. For loop and final code
+## Step 5. For loop and final code
 
 The associative array 'gene' is the perfect data structure for our code, because it saves FASTA IDs and sequences as pairs. However, instead of telling the program that 'gene['ID1']='AAAA' and so on, we need to enter values into 'gene' based on processed FASTA file. That means you need a for loop to go over the elements of the array 'lines', process each line to find the ID or the sequence and keep adding information to the associative array 'gene'. The program turns into -
 

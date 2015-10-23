@@ -1,11 +1,12 @@
-# Module 5 - An example
+# Level 5 - An example of full program
+
+
 
 ## Reading a FASTA file
 
-Reading a FASTA File
-
 
 A FASTA file has the following format -
+
 ~~~~~~~~
 >ID1
 ATGTGGGAGG
@@ -27,7 +28,7 @@ Described in text, a fasta file reports the ID and sequence of each gene. The ID
 How do we write a script to read a FASTA file and use it for other analysis? This is a fascinating example covering many different aspects of programming.
 
 
-Data structure
+## Data structure
 
 The first question is what type of data structure we should use to store the FASTA file. Data structure is the method to store data within your program. For individual data, you can hold in string, integer or decimal data structure. For collection of data, you need something like array or associative array. Graph is a possible data structure for data on Airplanes flying between cities.
 
@@ -42,10 +43,11 @@ An associative array becomes a better answer in this case. In case of associativ
 In our program, we will use associative arrays.
 
 
-PERL
+## PERL
 
 
 In PERL, a string is described as a variable.
+
 ~~~~~~~~
 #!/usr/bin/perl
 
@@ -76,7 +78,7 @@ Please review the above code and then try to write your own version.
 
 
 
-PYTHON
+## PYTHON
 
 ~~~~~~~~
 #!/usr/bin/env python
@@ -105,6 +107,7 @@ for line in lines:
                         gene[id]  =outl.group(1)
 ~~~~~~~~
 
+## GO
 
 ~~~~~~~~
 // https://gobyexample.com/regular-expressions

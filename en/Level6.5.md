@@ -1,7 +1,5 @@
 # Exercises
 
-## Coding exercises
 
-
-## Debugging exercises
+Available only in the leanpub version.
 
